@@ -5,6 +5,10 @@
 import settings from './settings.json';
 import loop from './classes/loop';
 
-console.log('loop:', loop);
-
 window.console.log('Testing settings: width (%s) height (%d)', settings.width, parseInt(settings.height, 10));
+
+var update = function () {
+};
+
+var l = new loop(16, update);
+l.start();
