@@ -2,4 +2,9 @@
  * The main boot file for MAPS
  */
 
-window.console.log('This will be my great game... I just need to build it');
+import settings from './settings.json';
+import loop from './classes/loop';
+
+console.log('loop:', loop);
+
+window.console.log('Testing settings: width (%s) height (%d)', settings.width, parseInt(settings.height, 10));
