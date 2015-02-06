@@ -1,3 +1,5 @@
+import dom from '../modules/dom';
+
 var _private = {};
 
 class loop {
@@ -26,6 +28,7 @@ class loop {
     }
 
     tick(timestamp) {
+
         if (_private.pause) {
             return;
         }
@@ -46,7 +49,7 @@ class loop {
             _private.draw();
         }
 
-        window.requestAnimationFrame(this.tick.bind(this));
+        dom.requestAnimationFrame(this.tick, this);
     }
 
 }

@@ -6,13 +6,29 @@ import settings from './settings.json';
 import loop from './classes/loop';
 import layout from './classes/layout';
 
-var layout = new layout(settings.width, settings.height);
-console.log(layout);
+class game {
 
-window.console.log('Testing settings: width (%s) height (%d)', settings.width, parseInt(settings.height, 10));
+    constructor() {
 
-var update = function () {
-};
+        const frameLength = 1000 / 60;
 
-var l = new loop(16, update);
-l.start();
+        this.layout = new layout(settings.width, settings.height);
+        this.loop = new loop(frameLength, this.update, this.draw);
+
+    }
+
+    start() {
+        this.loop.start();
+    }
+
+    update() {
+    }
+
+    draw() {
+    }
+
+}
+
+var game = new game();
+
+game.start();
