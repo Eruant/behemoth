@@ -7,8 +7,7 @@
     "url": "https://github.com/Eruant/behemoth"
   },
   "scripts": {
-    "start": "gulp build && npm run server",
-    "server": "node ./server.js",
+    "start": "gulp build && node ./server",
     "build": "gulp build",
     "watch": "gulp watch"
   },

@@ -1,5 +1,5 @@
 var browserify = require('browserify'),
-  buffer = require('vinyl-buffer');
+  buffer = require('vinyl-buffer'),
   gulp = require('gulp'),
   gutil = require('gulp-util'),
   source = require('vinyl-source-stream'),
@@ -33,13 +33,20 @@ gulp.task('markup', function () {
 
 });
 
+gulp.task('data', function () {
+
+    return gulp.src('src/data/**/*.json')
+        .pipe(gulp.dest('build/data'));
+});
+
 gulp.task('watch', ['build'], function () {
 
   gulp.watch('src/**/*.html', ['markup']);
   gulp.watch('src/js/**/*.js', ['scripts']);
+  gulp.watch('src/data/**/*.json', ['data']);
 
 });
 
-gulp.task('build', ['scripts', 'markup']);
+gulp.task('build', ['scripts', 'markup', 'data']);
 
 gulp.task('default', ['build']);
