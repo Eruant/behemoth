@@ -1,6 +1,6 @@
 class map {
 
-    consructor(width = 10, height = 10, data = []) {
+    constructor(width = 10, height = 10, data = []) {
 
         this.width = width;
         this.height = height;

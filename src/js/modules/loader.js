@@ -1,28 +1,33 @@
 import ajax from 'simple-ajax';
+import dom from './dom';
 
 class loader {
 
     constructor() {
 
-        this.loaded = 0;
-        this.toLoad = 0;
+        this.loaded = false;
+        this.filesLoaded = 0;
+        this.filesToLoad = 0;
+        this.onLoadedCallback = null;
     }
 
     progress() {
 
-        if (this.toLoad === 0) {
+        if (this.filesToLoad === 0) {
+            this.loaded = true;
             return 1;
-        } else if (this.loaded === 0) {
+        } else if (this.filesLoaded === 0) {
             return 0;
         } else {
-            return this.toLoad / this.loaded;
+            return this.filesToLoad / this.filesLoaded;
         }
 
     }
 
     load(path, callback) {
 
-        this.toLoad++;
+        this.loaded = false;
+        this.filesToLoad++;
 
         new ajax(path)
             .on('success', (event, data) => {
@@ -32,10 +37,19 @@ class loader {
                 callback('error', message);
             })
             .on('complete', () => {
-                this.loaded++;
+                this.filesLoaded++;
+
+                if (this.progress() === 1 && this.onLoadedCallback) {
+                    this.onLoadedCallback();
+                }
             })
             .send();
     }
+
+    onLoaded(scope, callback) {
+        this.onLoadedCallback = callback.bind(scope);
+    }
+
 }
 
 export default new loader();

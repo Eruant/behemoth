@@ -20,23 +20,25 @@ class game {
         this.levels = new levels();
 
         this.levels.load('level1');
+        loader.onLoaded(this, this.start);
 
     }
 
     start() {
+        this.currentLevel = this.levels.maps.level1;
         this.loop.start();
     }
 
     update() {
+
         //console.log('loaded: %d', Math.floor(loader.progress() * 100));
     }
 
     draw() {
-        render.draw(this.layout.ctx);
+
+        render.draw(this.layout.ctx, this.currentLevel);
     }
 
 }
 
 var game = new game();
-
-game.start();
