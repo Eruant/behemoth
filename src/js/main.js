@@ -7,6 +7,7 @@ import loop from './classes/loop';
 import layout from './classes/layout';
 import levels from './classes/levels';
 import loader from './modules/loader';
+import render from './modules/render';
 
 class game {
 
@@ -15,7 +16,7 @@ class game {
         const frameLength = 1000 / 60;
 
         this.layout = new layout(settings.width, settings.height);
-        this.loop = new loop(frameLength, this.update, this.draw);
+        this.loop = new loop(this, frameLength, this.update, this.draw);
         this.levels = new levels();
 
         this.levels.load('level1');
@@ -27,10 +28,11 @@ class game {
     }
 
     update() {
-        console.log('loaded: %d', Math.floor(loader.progress() * 100));
+        //console.log('loaded: %d', Math.floor(loader.progress() * 100));
     }
 
     draw() {
+        render.draw(this.layout.ctx);
     }
 
 }

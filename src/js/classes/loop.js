@@ -4,11 +4,11 @@ var _private = {};
 
 class loop {
 
-    constructor(frameTime = (1000 / 60), update = null, draw = null) {
+    constructor(scope = this, frameTime = (1000 / 60), update = null, draw = null) {
         _private.frameTime = frameTime;
         _private.pause = true;
-        _private.update = update;
-        _private.draw = draw;
+        _private.update = update.bind(scope);
+        _private.draw = draw.bind(scope);
     }
 
     start() {
