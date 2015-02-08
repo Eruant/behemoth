@@ -18,4 +18,12 @@ dom.requestAnimationFrame = function (callback, scope) {
     _window.requestAnimationFrame(callback.bind(scope));
 };
 
+dom.eventListener = function (scope, add, type, callback) {
+    if (add === true) {
+        _window.addEventListener(type, callback.bind(scope), false);
+    } else {
+        _window.removeEventListener(type);
+    }
+};
+
 export default dom;

@@ -26,6 +26,21 @@ class levels {
             }
         });
     }
+
+    triggerGates(map) {
+
+        for (let i = 0, len = map.data.length; i < len; i++) {
+
+            switch (map.data[i]) {
+                case 'o':
+                    map.data[i] = 'c';
+                    break;
+                case 'c':
+                    map.data[i] = 'o';
+                    break;
+            }
+        }
+    }
 }
 
 export default levels;
