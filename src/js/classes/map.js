@@ -5,9 +5,6 @@ class map {
         this.width = options.width;
         this.height = options.height;
         this.data = options.data;
-        this.mobs = options.mobs;
-
-        // TODO deal with mobs
     }
 
     getCoordinatesForKey(key) {

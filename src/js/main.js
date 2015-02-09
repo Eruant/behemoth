@@ -16,7 +16,7 @@ class game {
 
     constructor() {
 
-        const frameLength = 1000 / 60;
+        const frameLength = 1000 / 3;
 
         this.layout = new layout(settings.width, settings.height);
         this.loop = new loop(this, frameLength, this.update, this.draw);
@@ -24,6 +24,7 @@ class game {
         render.setDimentions(settings.width, settings.height);
 
         this.levels.load('level1');
+        this.levels.setMap('level1');
         this.isLoading = true;
         loader.onLoaded(this, this.start);
 
@@ -48,6 +49,8 @@ class game {
             this.keyActive = false;
         }
 
+        this.levels.updateMobs();
+
     }
 
     draw() {
@@ -55,7 +58,8 @@ class game {
         if (this.isLoading) {
             render.drawLoader(this.layout.ctx, loader.progress());
         } else {
-            render.draw(this.layout.ctx, this.currentLevel);
+            render.drawMap(this.layout.ctx, this.currentLevel);
+            render.drawMobs(this.layout.ctx, this.currentLevel.mobs);
         }
     }
 

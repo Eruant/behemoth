@@ -6,6 +6,7 @@ class render {
     setDimentions(width, height) {
         this.width = width;
         this.height = height;
+        this.tileSize = 32;
     }
 
     drawLoader(ctx, progress) {
@@ -28,11 +29,10 @@ class render {
         ctx.restore();
     }
 
-    draw(ctx, map) {
+    drawMap(ctx, map) {
 
         var x = 0,
-            y = 0,
-            tileSize = 32;
+            y = 0;
 
         for (let i = 0, len = map.data.length; i < len; i++) {
 
@@ -50,15 +50,34 @@ class render {
                       ctx.fillStyle = 'hsl(30, 50%, 60%)';
             }
 
-            ctx.fillRect(x, y, tileSize - 1, tileSize - 1);
+            ctx.fillRect(x, y, this.tileSize - 1, this.tileSize - 1);
 
             if (i % map.width === map.width - 1) {
                 x = 0;
-                y += tileSize;
+                y += this.tileSize;
             } else {
-                x += tileSize;
+                x += this.tileSize;
             }
         }
+    }
+
+    drawMobs(ctx, mobs) {
+
+        var mobSize = this.tileSize * 0.7,
+            padding = (this.tileSize - mobSize) * 0.5;
+
+        ctx.fillStyle = 'hsl(240, 50%, 60%)';
+
+        for (let i = 0, len = mobs.length; i < len; i++) {
+
+            let mob = mobs[i];
+
+            ctx.save();
+            ctx.translate(mob.position.x * this.tileSize, mob.position.y * this.tileSize);
+            ctx.fillRect(padding, padding, mobSize, mobSize);
+            ctx.restore();
+        }
+
     }
 }
 
