@@ -8,9 +8,9 @@ class levels {
         this.maps = {};
     }
 
-    add(name, width, height, data) {
+    add(options) {
 
-        this.maps[name] = new map(width, height, data);
+        this.maps[options.name] = new map(options);
     }
 
     load(path) {
@@ -22,7 +22,7 @@ class levels {
 
                 var map = JSON.parse(data);
 
-                this.add(map.name, map.width, map.height, map.data);
+                this.add(map);
             }
         });
     }

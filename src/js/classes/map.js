@@ -1,11 +1,13 @@
 class map {
 
-    constructor(width = 10, height = 10, data = []) {
+    constructor(options) {
 
-        this.width = width;
-        this.height = height;
-        this.data = data;
+        this.width = options.width;
+        this.height = options.height;
+        this.data = options.data;
+        this.mobs = options.mobs;
 
+        // TODO deal with mobs
     }
 
     getCoordinatesForKey(key) {
