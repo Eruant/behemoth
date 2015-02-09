@@ -3,6 +3,31 @@ class render {
     constructor() {
     }
 
+    setDimentions(width, height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    drawLoader(ctx, progress) {
+
+        this.clearLoader(ctx);
+
+        ctx.fillStyle = 'hsl(270, 50%, 60%)';
+        ctx.strokeStyle = 'hsl(270, 50%, 60%)';
+        ctx.save();
+        ctx.translate(this.width * 0.5, this.height * 0.5);
+        ctx.strokeRect(-50, -5, 100, 10);
+        ctx.fillRect(-50, -5, Math.floor(progress * 100), 10);
+        ctx.restore();
+    }
+
+    clearLoader(ctx) {
+        ctx.save();
+        ctx.translate(this.width * 0.5, this.height * 0.5);
+        ctx.clearRect(-51, -6, 102, 12);
+        ctx.restore();
+    }
+
     draw(ctx, map) {
 
         var x = 0,

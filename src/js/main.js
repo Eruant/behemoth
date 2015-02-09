@@ -21,17 +21,22 @@ class game {
         this.layout = new layout(settings.width, settings.height);
         this.loop = new loop(this, frameLength, this.update, this.draw);
         this.levels = new levels();
+        render.setDimentions(settings.width, settings.height);
 
         this.levels.load('level1');
+        this.isLoading = true;
         loader.onLoaded(this, this.start);
 
         this.keyActive = false;
+        this.loop.start();
 
     }
 
     start() {
+
+        this.isLoading = false;
         this.currentLevel = this.levels.maps.level1;
-        this.loop.start();
+        render.clearLoader(this.layout.ctx);
     }
 
     update() {
@@ -43,12 +48,15 @@ class game {
             this.keyActive = false;
         }
 
-        //console.log('loaded: %d', Math.floor(loader.progress() * 100));
     }
 
     draw() {
 
-        render.draw(this.layout.ctx, this.currentLevel);
+        if (this.isLoading) {
+            render.drawLoader(this.layout.ctx, loader.progress());
+        } else {
+            render.draw(this.layout.ctx, this.currentLevel);
+        }
     }
 
 }

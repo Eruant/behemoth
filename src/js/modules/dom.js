@@ -26,4 +26,10 @@ dom.eventListener = function (scope, add, type, callback) {
     }
 };
 
+dom.setTimeout = function (callback, delay) {
+    _window.setTimeout(() => {
+        callback();
+    }, delay);
+};
+
 export default dom;
