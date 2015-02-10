@@ -84,19 +84,56 @@ class levels {
         if (mapValue === '.' || mapValue === 'o') {
             mob.position = nextPosition;
         } else {
-            // TODO figure out the best path to take
 
-            /*
+            // check clockwise
+
+            let clockwiseDirection,
+                clockwisePosition,
+                clockwiseMapKey,
+                clockwiseMapValue;
+
             if (mob.direction.x === 1) {
-                mob.direction = { x: 0, y: 1 };
+                clockwiseDirection = { x: 0, y: 1 };
             } else if (mob.direction.x === -1) {
-                mob.direction = { x: 0, y: -1 };
+                clockwiseDirection = { x: 0, y: -1 };
             } else if (mob.direction.y === 1) {
-                mob.direction = { x: -1, y: 0 };
+                clockwiseDirection = { x: -1, y: 0 };
             } else if (mob.direction.y === -1) {
-                mob.direction = { x: 1, y: 0 };
+                clockwiseDirection = { x: 1, y: 0 };
             }
-            */
+
+            clockwisePosition = {
+                x: mob.position.x + clockwiseDirection.x,
+                y: mob.position.y + clockwiseDirection.y
+            };
+
+            clockwiseMapKey = map.getKeyForCoordinates(clockwisePosition);
+            clockwiseMapValue = map.data[clockwiseMapKey];
+
+            if (clockwiseMapValue === '.' || clockwiseMapValue === 'o') {
+                mob.position = clockwisePosition;
+                mob.direction = clockwiseDirection;
+            } else {
+
+                // check anti clockwise
+                let anticlockwiseDirection = {
+                        x: (clockwiseDirection.x * -1),
+                        y: (clockwiseDirection.y * -1)
+                    },
+                    anticlockwisePosition = {
+                        x: mob.position.x + anticlockwiseDirection.x,
+                        y: mob.position.y + anticlockwiseDirection.y
+                    },
+                    anticlockwiseMapKey = map.getKeyForCoordinates(anticlockwisePosition),
+                    anticlockwiseMapValue = map.data[anticlockwiseMapKey];
+
+                if (anticlockwiseMapValue === '.' || anticlockwiseMapValue === 'o') {
+                    mob.position = anticlockwisePosition;
+                    mob.direction = anticlockwiseDirection;
+                } else {
+                    console.log('I\'m stuck!');
+                }
+            }
         }
 
     }
