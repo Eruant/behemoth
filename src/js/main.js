@@ -16,7 +16,7 @@ class game {
 
     constructor() {
 
-        const frameLength = 1000 / 60;
+        const frameLength = 1000 / 1;
 
         this.layout = new layout(settings.width, settings.height);
         this.loop = new loop(this, frameLength, this.update, this.draw);
