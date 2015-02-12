@@ -75,8 +75,11 @@ class render {
             ctx.save();
             ctx.translate(mob.position.x * this.tileSize, mob.position.y * this.tileSize);
             ctx.fillRect(padding, padding, mobSize, mobSize);
+
+            // TODO draw mob body parts
             ctx.restore();
         }
+
 
     }
 }

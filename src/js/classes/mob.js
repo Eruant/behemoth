@@ -3,6 +3,9 @@ class mob {
 
     constructor(position, direction) {
 
+        this.length = 3;
+        this.minLength = 3;
+
         this.position = {
             x: position.x || 0,
             y: position.y || 0
@@ -12,11 +15,47 @@ class mob {
             x: direction.x || 0,
             y: direction.y || 0
         };
+
+        this.bodyParts = [];
+
+        for (let i = 0, len = this.length -1; i < len; i++) {
+            this.addBodyPart();
+        }
+
+    }
+
+    addBodyPart() {
+
+        var position;
+
+        if (this.bodyParts.length === 0) {
+            position = {
+                x: this.position.x,
+                y: this.position.y
+            };
+        } else {
+            let part = this.bodyParts[this.bodyParts.length - 1];
+
+            position = {
+                x: part.x,
+                y: part.y
+            };
+        }
+
+        this.bodyParts.push(position);
     }
 
     setPosition(position) {
+
+        var startPosition = {
+            x: this.position.x,
+            y: this.position.y
+        };
+
         this.position.x = position.x;
         this.position.y = position.y;
+
+        this.updateBodyParts(startPosition);
     }
 
     setDirection(direction) {
@@ -97,7 +136,9 @@ class mob {
                     break;
             }
         } else {
-            // TODO rotate right
+            this.rotate();
+            this.rotate();
+            this.rotate();
         }
 
     }
@@ -108,6 +149,42 @@ class mob {
             x: this.position.x + this.direction.x,
             y: this.position.y + this.direction.y
         };
+    }
+
+    updateBodyParts(position) {
+
+        var lastPart = {
+            x: position.x,
+            y: position.y
+        };
+
+        for (let i = 0, len = this.bodyParts.length; i < len; i++) {
+
+            let part = this.bodyParts[i];
+
+            if (part.x !== lastPart.x || part.y !== lastPart.y) {
+
+                let thisPart = {
+                    x: this.bodyParts[i].x,
+                    y: this.bodyParts[i].y
+                };
+
+                this.bodyParts[i].x = lastPart.x;
+                this.bodyParts[i].y = lastPart.y;
+
+                lastPart.x = thisPart.x;
+                lastPart.y = thisPart.y;
+
+            }
+        }
+
+        //console.log('parts [x:%d y: %d] [x:%d, y:%d]',
+            //this.bodyParts[0].x,
+            //this.bodyParts[0].y,
+            //this.bodyParts[1].x,
+            //this.bodyParts[1].y
+        //);
+
     }
 
 }

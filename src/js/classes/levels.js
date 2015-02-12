@@ -78,7 +78,8 @@ class levels {
         var map = this.maps[this.currentMap],
             nextPosition = mob.getNextPosition(),
             nextMapKey = map.getKeyForCoordinates(nextPosition),
-            nextMapValue = map.data[nextMapKey];
+            nextMapValue = map.data[nextMapKey],
+            startPosition = mob.position;
 
         if (nextMapValue.match(/[\.o]/)) {
             mob.setPosition(nextPosition);
@@ -104,6 +105,8 @@ class levels {
                 }
             }
         }
+
+        // TODO update mob body...
     }
 
 }
