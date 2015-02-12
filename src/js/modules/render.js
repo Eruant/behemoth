@@ -66,18 +66,35 @@ class render {
         var mobSize = this.tileSize * 0.7,
             padding = (this.tileSize - mobSize) * 0.5;
 
-        ctx.fillStyle = 'hsl(240, 50%, 60%)';
-
+        // draw each mob
         for (let i = 0, len = mobs.length; i < len; i++) {
 
             let mob = mobs[i];
 
+            // draw head
             ctx.save();
             ctx.translate(mob.position.x * this.tileSize, mob.position.y * this.tileSize);
+            ctx.fillStyle = 'hsl(200, 50%, 60%)';
             ctx.fillRect(padding, padding, mobSize, mobSize);
-
-            // TODO draw mob body parts
             ctx.restore();
+
+            // draw each body part
+            for (let j = 0, jLen = mob.bodyParts.length; j < jLen; j++) {
+
+                let part = mob.bodyParts[j];
+
+                ctx.save();
+                ctx.translate(part.x * this.tileSize, part.y * this.tileSize);
+                if (j + 1 === jLen) {
+                    ctx.fillStyle = 'hsl(240, 50%, 60%)';
+                } else {
+                    ctx.fillStyle = 'hsl(220, 50%, 60%)';
+                }
+                ctx.fillRect(padding, padding, mobSize, mobSize);
+                ctx.restore();
+
+            }
+
         }
 
 

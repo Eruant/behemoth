@@ -3,7 +3,7 @@ class mob {
 
     constructor(position, direction) {
 
-        this.length = 3;
+        this.length = 5;
         this.minLength = 3;
 
         this.position = {
