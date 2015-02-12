@@ -1,10 +1,12 @@
 
 class mob {
 
-    constructor(position, direction) {
+    constructor(position, direction, color = Math.floor(Math.random(360))) {
 
         this.length = 5;
         this.minLength = 3;
+
+        this.color = color;
 
         this.position = {
             x: position.x || 0,

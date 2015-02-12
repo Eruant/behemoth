@@ -29,7 +29,9 @@ class levels {
                 y: parseInt(mobData.direction.y, 10)
             };
 
-            this.maps[options.name].mobs.push(new mob(position, direction));
+            let color = parseInt(mobData.color);
+
+            this.maps[options.name].mobs.push(new mob(position, direction, color));
         }
     }
 
@@ -106,7 +108,6 @@ class levels {
             }
         }
 
-        // TODO update mob body...
     }
 
 }

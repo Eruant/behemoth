@@ -74,7 +74,7 @@ class render {
             // draw head
             ctx.save();
             ctx.translate(mob.position.x * this.tileSize, mob.position.y * this.tileSize);
-            ctx.fillStyle = 'hsl(200, 50%, 60%)';
+            ctx.fillStyle = 'hsl(' + mob.color + ', 50%, 60%)';
             ctx.fillRect(padding, padding, mobSize, mobSize);
             ctx.restore();
 
@@ -86,9 +86,9 @@ class render {
                 ctx.save();
                 ctx.translate(part.x * this.tileSize, part.y * this.tileSize);
                 if (j + 1 === jLen) {
-                    ctx.fillStyle = 'hsl(240, 50%, 60%)';
+                    ctx.fillStyle = 'hsl(' + (mob.color + 40) + ', 50%, 60%)';
                 } else {
-                    ctx.fillStyle = 'hsl(220, 50%, 60%)';
+                    ctx.fillStyle = 'hsl(' + (mob.color + 20) + ', 50%, 60%)';
                 }
                 ctx.fillRect(padding, padding, mobSize, mobSize);
                 ctx.restore();

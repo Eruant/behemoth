@@ -16,15 +16,21 @@ class game {
 
     constructor() {
 
-        const frameLength = 1000 / 1;
+        const frameLength = 1000 / 30;
 
         this.layout = new layout(settings.width, settings.height);
         this.loop = new loop(this, frameLength, this.update, this.draw);
         this.levels = new levels();
         render.setDimentions(settings.width, settings.height);
 
-        this.levels.load('level2');
-        this.levels.setMap('level2');
+        for (let i = 0, len = 3; i < len; i++) {
+
+            let levelText = 'level' + (i + 1);
+
+            this.levels.load(levelText);
+        }
+
+        this.levels.setMap('level3');
         this.isLoading = true;
         loader.onLoaded(this, this.start);
 
@@ -36,7 +42,7 @@ class game {
     start() {
 
         this.isLoading = false;
-        this.currentLevel = this.levels.maps.level2;
+        this.currentLevel = this.levels.maps[this.levels.currentMap];
         render.clearLoader(this.layout.ctx);
     }
 
