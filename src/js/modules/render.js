@@ -23,6 +23,7 @@ class render {
     }
 
     clearLoader(ctx) {
+
         ctx.save();
         ctx.translate(this.width * 0.5, this.height * 0.5);
         ctx.clearRect(-51, -6, 102, 12);

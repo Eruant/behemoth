@@ -19,7 +19,7 @@ class loader {
         } else if (this.filesLoaded === 0) {
             return 0;
         } else {
-            return this.filesToLoad / this.filesLoaded;
+            return this.filesLoaded / this.filesToLoad;
         }
 
     }
