@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node ./server",
     "build": "gulp build",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "package": "rm -r build && gulp build"
   },
   "devDependencies": {
     "6to5ify": "^4.1.0",
