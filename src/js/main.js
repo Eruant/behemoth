@@ -55,7 +55,9 @@ class game {
             this.keyActive = false;
         }
 
-        this.levels.updateMobs();
+        if (!this.isLoading) {
+            this.levels.updateMobs();
+        }
 
     }
 
