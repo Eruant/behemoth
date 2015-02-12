@@ -41,7 +41,7 @@ class levels {
 
     load(path) {
 
-        var url = '/data/levels/' + path + '.json';
+        var url = './data/levels/' + path + '.json';
 
         loader.load(url, (type, data) => {
             if (type === 'success') {
