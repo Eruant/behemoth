@@ -1,12 +1,23 @@
 class render {
 
     constructor() {
+
+        this.scale = [1, 1];
     }
 
     setDimentions(width, height) {
         this.width = width;
         this.height = height;
-        this.tileSize = 32;
+        this.tileSize = 2;
+    }
+
+    setScale(tilesX, tilesY) {
+
+        var maxTileWidth = this.width / tilesX,
+            maxTileHeight = this.height / tilesY;
+
+        this.tileSize = (maxTileWidth > maxTileHeight) ? maxTileHeight : maxTileWidth;
+
     }
 
     drawLoader(ctx, progress) {
@@ -31,6 +42,8 @@ class render {
     }
 
     drawMap(ctx, map) {
+
+        this.setScale(map.width, map.height);
 
         var x = 0,
             y = 0;
@@ -63,6 +76,8 @@ class render {
     }
 
     drawMobs(ctx, mobs) {
+
+        this.setScale(map.width, map.height);
 
         var mobSize = this.tileSize * 0.7,
             padding = (this.tileSize - mobSize) * 0.5;

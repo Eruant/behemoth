@@ -1,4 +1,14 @@
 {
-  "width": "600",
-  "height": "400"
+    "width": "600",
+    "height": "400",
+    "mobs": [
+        {
+            "name": "mob-1",
+            "color": "200"
+        },
+        {
+            "name": "mob-2",
+            "color": "100"
+        }
+    ]
 }

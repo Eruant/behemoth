@@ -23,14 +23,14 @@ class game {
         this.levels = new levels();
         render.setDimentions(settings.width, settings.height);
 
-        for (let i = 0, len = 3; i < len; i++) {
+        for (let i = 0, len = 4; i < len; i++) {
 
             let levelText = 'level' + (i + 1);
 
             this.levels.load(levelText);
         }
 
-        this.levels.setMap('level3');
+        this.levels.setMap('level4');
         this.isLoading = true;
         loader.onLoaded(this, this.start);
 
