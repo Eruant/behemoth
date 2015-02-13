@@ -14,6 +14,7 @@ class levels {
 
         this.maps[options.name] = new map(options);
 
+        // TODO remove this an trigger from localstorage
         this.maps[options.name].mobs = [];
         for (let i = 0, len = options.mobs.length; i < len; i++) {
 

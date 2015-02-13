@@ -1,3 +1,6 @@
-# LittleBall Maps
+# Behemoth
 
-A game build with es6...
+TODO
+
+ - move mobs out of levels into localstoreage
+ - create pixel art with tranparency for mobs
