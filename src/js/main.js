@@ -8,15 +8,20 @@ import loop from './classes/loop';
 import layout from './classes/layout';
 import levels from './classes/levels';
 
+//import dom from './modules/dom';
 import loader from './modules/loader';
 import render from './modules/render';
 import io from './modules/io';
 
-class game {
+class Game {
 
     constructor() {
 
         const frameLength = 1000 / 30;
+
+        // TODO finish this
+        //var mobs = dom.load('mobs') || settings.mobs;
+        //console.log('mobs', mobs);
 
         this.layout = new layout(settings.width, settings.height);
         this.loop = new loop(this, frameLength, this.update, this.draw);
@@ -67,10 +72,11 @@ class game {
             render.drawLoader(this.layout.ctx, loader.progress());
         } else {
             render.drawMap(this.layout.ctx, this.currentLevel);
-            render.drawMobs(this.layout.ctx, this.currentLevel.mobs);
+            render.drawMobs(this.layout.ctx, this.currentLevel.mobs, this.currentLevel);
         }
+
     }
 
 }
 
-var game = new game();
+var game = new Game();

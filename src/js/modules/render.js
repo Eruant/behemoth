@@ -8,7 +8,7 @@ class render {
     setDimentions(width, height) {
         this.width = width;
         this.height = height;
-        this.tileSize = 2;
+        this.tileSize = 32;
     }
 
     setScale(tilesX, tilesY) {
@@ -31,6 +31,7 @@ class render {
         ctx.strokeRect(-50, -5, 100, 10);
         ctx.fillRect(-50, -5, Math.floor(progress * 100), 10);
         ctx.restore();
+
     }
 
     clearLoader(ctx) {
@@ -73,9 +74,10 @@ class render {
                 x += this.tileSize;
             }
         }
+
     }
 
-    drawMobs(ctx, mobs) {
+    drawMobs(ctx, mobs, map) {
 
         this.setScale(map.width, map.height);
 
