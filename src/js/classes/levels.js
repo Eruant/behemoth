@@ -1,6 +1,7 @@
 import map from './map';
 import loader from '../modules/loader';
 import mob from './mob';
+import settings from '../settings.json';
 
 class levels {
 
@@ -30,7 +31,13 @@ class levels {
                 y: parseInt(mobData.direction.y, 10)
             };
 
-            let color = parseInt(mobData.color);
+            let color = 0;
+
+            if (mobData.color) {
+                color = parseInt(mobData.color);
+            } else {
+                color = settings.mobs[i].color;
+            }
 
             this.maps[options.name].mobs.push(new mob(position, direction, color));
         }

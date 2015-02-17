@@ -21,8 +21,6 @@
     ],
     "mobs": [
         {
-            "type": "human",
-            "color": "270",
             "position": {
                 "x": "1",
                 "y": "1"
