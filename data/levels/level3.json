@@ -16,8 +16,6 @@
     ],
     "mobs": [
         {
-            "type": "human",
-            "color": "200",
             "position": {
                 "x": "1",
                 "y": "1"
@@ -28,8 +26,6 @@
             }
         },
         {
-            "type": "cpu",
-            "color": "100",
             "position": {
                 "x": "8",
                 "y": "8"
