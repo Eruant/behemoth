@@ -1,7 +1,7 @@
 import map from './map';
 import loader from '../modules/loader';
 import mob from './mob';
-import settings from '../settings.json';
+import dom from '../modules/dom';
 
 class levels {
 
@@ -13,9 +13,10 @@ class levels {
 
     add(options) {
 
+        var mobSettings = dom.loadStorage('mobs');
+
         this.maps[options.name] = new map(options);
 
-        // TODO remove this an trigger from localstorage
         this.maps[options.name].mobs = [];
         for (let i = 0, len = options.mobs.length; i < len; i++) {
 
@@ -31,13 +32,7 @@ class levels {
                 y: parseInt(mobData.direction.y, 10)
             };
 
-            let color = 0;
-
-            if (mobData.color) {
-                color = parseInt(mobData.color);
-            } else {
-                color = settings.mobs[i].color;
-            }
+            let color = mobSettings[i].color;
 
             this.maps[options.name].mobs.push(new mob(position, direction, color));
         }

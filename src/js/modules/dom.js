@@ -32,14 +32,16 @@ dom.setTimeout = function (callback, delay) {
     }, delay);
 };
 
-//dom.save = function (key, value) {
-    //_window.localStorage.setItem(key, value);
-//};
+dom.saveStorage = function (key, value) {
 
-//dom.load = function (key) {
-    //let item = _window.localStorage.getItem(key);
+    console.log(key);
+    _window.localStorage.setItem(key, JSON.stringify(value));
+};
 
-    //return JSON.parse(item);
-//};
+dom.loadStorage = function (key) {
+    let item = _window.localStorage.getItem(key);
+
+    return JSON.parse(item);
+};
 
 export default dom;

@@ -8,7 +8,7 @@ import loop from './classes/loop';
 import layout from './classes/layout';
 import levels from './classes/levels';
 
-//import dom from './modules/dom';
+import dom from './modules/dom';
 import loader from './modules/loader';
 import render from './modules/render';
 import io from './modules/io';
@@ -20,8 +20,12 @@ class Game {
         const frameLength = 1000 / 30;
 
         // TODO finish this
-        //var mobs = dom.load('mobs') || settings.mobs;
-        //console.log('mobs', mobs);
+        var mobs = dom.loadStorage('mobs');
+
+        if (!mobs) {
+            mobs = settings.mobs;
+            dom.saveStorage('mobs', mobs);
+        }
 
         this.layout = new layout(settings.width, settings.height);
         this.loop = new loop(this, frameLength, this.update, this.draw);
