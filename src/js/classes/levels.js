@@ -76,6 +76,8 @@ class levels {
         for (let i = 0, len = this.maps[this.currentMap].mobs.length; i < len; i++) {
             this.updateMob(this.maps[this.currentMap].mobs[i]);
         }
+
+        this.checkCollisions();
     }
 
     updateMob(mob) {
@@ -108,6 +110,67 @@ class levels {
                 } else {
                     console.warn('mob stuck');
                 }
+            }
+        }
+
+    }
+
+    checkCollisions() {
+
+        var occupiedSlots = [],
+            mobs = this.maps[this.currentMap].mobs,
+            deadMobs = [];
+
+        for (let i = 0, len = mobs.length; i < len; i++) {
+
+            let mob = mobs[i];
+
+            for (let j = 0, jLen = mob.bodyParts.length; j < jLen; j++) {
+                occupiedSlots.push({
+                    mob: i,
+                    part: j,
+                    position: mob.bodyParts[j]
+                });
+            }
+
+        }
+
+        for (let i = 0, len = occupiedSlots.length; i < len; i++) {
+
+            let slot = occupiedSlots[i];
+
+            for (let j = 0, jLen = mobs.length; j < jLen; j++) {
+
+                let mob = mobs[j];
+
+                if (mob.position.x === slot.position.x && mob.position.y === slot.position.y) {
+
+                    let targetMob = mobs[slot.mob];
+
+                    targetMob.bodyParts.length = j;
+                    targetMob.length = j + 1;
+
+                    if (targetMob.length < targetMob.minLength) {
+                        deadMobs.push(slot.mob);
+                    }
+
+                }
+
+            }
+        }
+
+        // sort decending
+        deadMobs = deadMobs.sort(function (a, b) {
+            return b - a;
+        });
+
+        for (let i = 0, len = deadMobs.length; i < len; i++) {
+
+            //console.log('Killed', mobs[deadMobs[i]]);
+            mobs.splice(deadMobs[i], 1);
+
+            if (mobs.length === 1) {
+                //console.log('winner', mobs[0]);
             }
         }
 

@@ -17,9 +17,8 @@ class Game {
 
     constructor() {
 
-        const frameLength = 1000 / 30;
+        const FRAME_LENGTH = 1000 / 15;
 
-        // TODO finish this
         var mobs = dom.loadStorage('mobs');
 
         if (!mobs) {
@@ -28,7 +27,7 @@ class Game {
         }
 
         this.layout = new layout(settings.width, settings.height);
-        this.loop = new loop(this, frameLength, this.update, this.draw);
+        this.loop = new loop(this, FRAME_LENGTH, this.update, this.draw);
         this.levels = new levels();
         render.setDimentions(settings.width, settings.height);
 
