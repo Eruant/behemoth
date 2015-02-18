@@ -4,11 +4,19 @@
     "mobs": [
         {
             "name": "mob-1",
-            "color": "200"
+            "color": "0"
         },
         {
             "name": "mob-2",
-            "color": "100"
+            "color": "90"
+        },
+        {
+            "name": "mob-3",
+            "color": "180"
+        },
+        {
+            "name": "mob-4",
+            "color": "270"
         }
     ]
 }

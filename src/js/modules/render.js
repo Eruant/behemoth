@@ -104,9 +104,9 @@ class render {
                 ctx.save();
                 ctx.translate(part.x * this.tileSize, part.y * this.tileSize);
                 if (j + 1 === jLen) {
-                    ctx.fillStyle = 'hsl(' + (mob.color + 40) + ', 50%, 60%)';
+                    ctx.fillStyle = 'hsl(' + this.addColorValue(mob.color, 40) + ', 50%, 60%)';
                 } else {
-                    ctx.fillStyle = 'hsl(' + (mob.color + 20) + ', 50%, 60%)';
+                    ctx.fillStyle = 'hsl(' + this.addColorValue(mob.color, 20) + ', 50%, 60%)';
                 }
                 ctx.fillRect(padding, padding, mobSize, mobSize);
                 ctx.restore();
@@ -115,7 +115,17 @@ class render {
 
         }
 
+    }
 
+    addColorValue(original, difference) {
+
+        var newValue = original + difference;
+
+        if (newValue > 360) {
+            newValue -= 360;
+        }
+
+        return newValue;
     }
 }
 

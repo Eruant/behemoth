@@ -32,7 +32,7 @@ class levels {
                 y: parseInt(mobData.direction.y, 10)
             };
 
-            let color = mobSettings[i].color;
+            let color = parseInt(mobSettings[i].color, 10);
 
             this.maps[options.name].mobs.push(new mob(position, direction, color));
         }
