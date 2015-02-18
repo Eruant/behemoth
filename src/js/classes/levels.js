@@ -150,6 +150,8 @@ class levels {
                     targetMob.bodyParts.length = j;
                     targetMob.length = j + 1;
 
+                    mob.addBodyPart();
+
                     if (targetMob.length < targetMob.minLength) {
                         deadMobs.push(slot.mob);
                     }
