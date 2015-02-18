@@ -34,7 +34,6 @@ dom.setTimeout = function (callback, delay) {
 
 dom.saveStorage = function (key, value) {
 
-    console.log(key);
     _window.localStorage.setItem(key, JSON.stringify(value));
 };
 
