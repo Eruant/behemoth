@@ -1,3 +1,5 @@
+import settings from '../settings.json';
+
 class render {
 
     constructor() {
@@ -126,6 +128,13 @@ class render {
         }
 
         return newValue;
+    }
+
+    drawCountdown(ctx, number) {
+      ctx.fillStyle = 'hsl(0, 30%, 90%)';
+      ctx.font = '100px Georgia';
+      ctx.textAlign = 'center';
+      ctx.fillText(number, settings.width * 0.5, settings.height * 0.5);
     }
 }
 

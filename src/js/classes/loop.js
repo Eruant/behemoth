@@ -40,7 +40,7 @@ class loop {
 
         if (_private.timeSinceLastUpdate > _private.frameTime) {
             if (_private.update !== null) {
-                _private.update();
+                _private.update(_private.timeSinceLastUpdate);
             }
             _private.timeSinceLastUpdate = 0;
         }

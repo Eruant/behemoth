@@ -43,6 +43,11 @@ class Game {
         loader.onLoaded(this, this.start);
 
         this.keyActive = false;
+        this.countdown = {
+          current: 3,
+          interval: 3000,
+          timePassed: 0
+        };
         this.loop.start();
 
     }
@@ -54,7 +59,7 @@ class Game {
         render.clearLoader(this.layout.ctx);
     }
 
-    update() {
+    update(t) {
 
         if (io.isKeyPressed() && this.keyActive === false) {
             this.keyActive = true;
@@ -64,18 +69,35 @@ class Game {
         }
 
         if (!this.isLoading) {
-            this.levels.updateMobs();
+            if (this.countdown.current > 0) {
+
+                this.countdown.timePassed += t;
+
+                if (this.countdown.timePassed > this.countdown.interval) {
+                    this.countdown.current--;
+                    this.countdown.timePassed -= this.countdown.interval;
+                }
+
+            } else {
+                this.levels.updateMobs();
+            }
         }
 
     }
 
     draw() {
 
+        this.layout.ctx.fillStyle = 'hsl(30, 30%, 40%)';
+        this.layout.ctx.fillRect(0, 0, settings.width, settings.height);
+
         if (this.isLoading) {
             render.drawLoader(this.layout.ctx, loader.progress());
         } else {
             render.drawMap(this.layout.ctx, this.currentLevel);
             render.drawMobs(this.layout.ctx, this.currentLevel.mobs, this.currentLevel);
+            if (this.countdown.current > 0) {
+                render.drawCountdown(this.layout.ctx, this.countdown.current);
+            }
         }
 
     }
