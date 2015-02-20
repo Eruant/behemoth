@@ -7,7 +7,7 @@
     "url": "https://github.com/Eruant/behemoth"
   },
   "scripts": {
-    "start": "browser-sync start --files 'src/*' --server 'build'",
+    "start": "browser-sync start --files 'build/**/*' --server 'build'",
     "build": "gulp build",
     "watch": "gulp watch",
     "package": "rm -r build && gulp build"

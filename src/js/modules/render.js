@@ -83,6 +83,7 @@ class render {
 
         this.setScale(map.width, map.height);
 
+
         var mobSize = this.tileSize * 0.7,
             padding = (this.tileSize - mobSize) * 0.5;
 

@@ -17,7 +17,7 @@ class Game {
 
     constructor() {
 
-        const FRAME_LENGTH = 1000 / 15;
+        const FRAME_LENGTH = 1000 / 10;
 
         var mobs = dom.loadStorage('mobs');
 
@@ -93,11 +93,30 @@ class Game {
         if (this.isLoading) {
             render.drawLoader(this.layout.ctx, loader.progress());
         } else {
+
+            let offset = {
+                x: 0,
+                y: 0
+            };
+
+            if (this.currentLevel.width * render.tileSize < render.width) {
+                offset.x = (render.width - (this.currentLevel.width * render.tileSize)) * 0.5;
+            } else {
+                offset.y = (render.height - (this.currentLevel.height * render.tileSize)) * 0.5;
+            }
+
+            this.layout.ctx.save();
+            this.layout.ctx.translate(offset.x, offset.y);
+
             render.drawMap(this.layout.ctx, this.currentLevel);
             render.drawMobs(this.layout.ctx, this.currentLevel.mobs, this.currentLevel);
+
+            this.layout.ctx.restore();
+
             if (this.countdown.current > 0) {
                 render.drawCountdown(this.layout.ctx, this.countdown.current);
             }
+
         }
 
     }
