@@ -24,7 +24,7 @@ class loader {
 
     }
 
-    load(path, callback) {
+    loadAjax(path, callback) {
 
         this.loaded = false;
         this.filesToLoad++;
@@ -44,6 +44,30 @@ class loader {
                 }
             })
             .send();
+    }
+
+    loadImg(path, callback) {
+
+        this.loaded = false;
+        this.filesToLoad++;
+
+        var img = new Image();
+
+        img.onload = () => {
+            this.filesLoaded++;
+
+            if (this.progress() === 1 && this.onLoadedCallback) {
+                this.onLoadedCallback();
+            }
+
+            if (typeof callback === 'function') {
+                callback();
+            }
+        };
+        img.src = path;
+
+        return img;
+
     }
 
     onLoaded(scope, callback) {

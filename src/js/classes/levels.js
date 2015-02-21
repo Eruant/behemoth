@@ -46,7 +46,7 @@ class levels {
 
         var url = './data/levels/' + path + '.json';
 
-        loader.load(url, (type, data) => {
+        loader.loadAjax(url, (type, data) => {
             if (type === 'success') {
 
                 var map = JSON.parse(data);

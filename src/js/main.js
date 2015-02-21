@@ -19,7 +19,8 @@ class Game {
 
         const FRAME_LENGTH = 1000 / 10;
 
-        var mobs = dom.loadStorage('mobs');
+        var mobs = dom.loadStorage('mobs'),
+            tileset = loader.loadImg('img/tileset.png');
 
         if (!mobs) {
             mobs = settings.mobs;
