@@ -1,10 +1,12 @@
 import settings from '../settings.json';
+import loader from './loader';
 
 class render {
 
     constructor() {
 
         this.scale = [1, 1];
+        this.tileset = loader.loadImg('img/tileset.png');
     }
 
     setDimentions(width, height) {
@@ -20,6 +22,21 @@ class render {
 
         this.tileSize = (maxTileWidth > maxTileHeight) ? maxTileHeight : maxTileWidth;
 
+    }
+
+    drawTile(ctx, x, y, type = 0) {
+
+        var size = 16,
+            sx = size * type,
+            sy = 0,
+            sw = size,
+            sh = size,
+            dx = x,
+            dy = y,
+            dw = this.tileSize,
+            dh = this.tileSize;
+
+        ctx.drawImage(this.tileset, sx, sy, sw, sh, dx, dy, dw, dh);
     }
 
     drawLoader(ctx, progress) {
@@ -55,19 +72,17 @@ class render {
 
             switch (map.data[i]) {
                 case 'X':
-                      ctx.fillStyle = 'hsl(100, 50%, 60%)';
+                      this.drawTile(ctx, x, y, 0);
                       break;
                 case 'c':
-                      ctx.fillStyle = 'hsl(30, 50%, 80%)';
+                      this.drawTile(ctx, x, y, 0);
                       break;
                 case 'o':
-                      ctx.fillStyle = 'hsl(30, 50%, 60%)';
+                      this.drawTile(ctx, x, y, 1);
                       break;
                 default:
-                      ctx.fillStyle = 'hsl(30, 50%, 60%)';
+                      this.drawTile(ctx, x, y, 1);
             }
-
-            ctx.fillRect(x, y, this.tileSize - 1, this.tileSize - 1);
 
             if (i % map.width === map.width - 1) {
                 x = 0;
