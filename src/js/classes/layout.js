@@ -10,6 +10,9 @@ class layout {
         canvas.width = width;
         canvas.height = height;
 
+        // render on pixels (not inbetween)
+        ctx.translate(-0.5, -0.5);
+
         dom.load(function () {
             dom.add(canvas, 'body');
         });
