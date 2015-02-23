@@ -111,6 +111,7 @@ class render {
             ctx.save();
             ctx.translate(mob.position.x * this.tileSize, mob.position.y * this.tileSize);
             ctx.fillStyle = 'hsl(' + mob.color + ', 50%, 60%)';
+            this.drawTile(ctx, 0, 0, 0);
             ctx.fillRect(padding, padding, mobSize, mobSize);
             ctx.restore();
 
