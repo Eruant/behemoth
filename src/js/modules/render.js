@@ -127,6 +127,7 @@ class render {
                 } else {
                     ctx.fillStyle = 'hsl(' + this.addColorValue(mob.color, 20) + ', 50%, 60%)';
                 }
+                this.drawTile(ctx, 0, 0, 0);
                 ctx.fillRect(padding, padding, mobSize, mobSize);
                 ctx.restore();
 
