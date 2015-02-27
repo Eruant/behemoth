@@ -111,24 +111,29 @@ class render {
             ctx.save();
             ctx.translate(mob.position.x * this.tileSize, mob.position.y * this.tileSize);
             ctx.fillStyle = 'hsl(' + mob.color + ', 50%, 60%)';
-            this.drawTile(ctx, 0, 0, 0);
             ctx.fillRect(padding, padding, mobSize, mobSize);
+            this.drawTile(ctx, 0, 0, 2);
             ctx.restore();
 
             // draw each body part
             for (let j = 0, jLen = mob.bodyParts.length; j < jLen; j++) {
 
                 let part = mob.bodyParts[j];
+                let last = (j + 1 === jLen) ? true : false;
 
                 ctx.save();
                 ctx.translate(part.x * this.tileSize, part.y * this.tileSize);
-                if (j + 1 === jLen) {
+                if (last) {
                     ctx.fillStyle = 'hsl(' + this.addColorValue(mob.color, 40) + ', 50%, 60%)';
                 } else {
                     ctx.fillStyle = 'hsl(' + this.addColorValue(mob.color, 20) + ', 50%, 60%)';
                 }
-                this.drawTile(ctx, 0, 0, 0);
                 ctx.fillRect(padding, padding, mobSize, mobSize);
+                if (last) {
+                    this.drawTile(ctx, 0, 0, 4);
+                } else {
+                    this.drawTile(ctx, 0, 0, 3);
+                }
                 ctx.restore();
 
             }
