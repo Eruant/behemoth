@@ -72,7 +72,7 @@ class render {
 
             switch (map.data[i]) {
                 case 'X':
-                      this.drawTile(ctx, x, y, 0);
+                      //this.drawTile(ctx, x, y, 0);
                       break;
                 case 'c':
                       this.drawTile(ctx, x, y, 0);
@@ -105,11 +105,18 @@ class render {
         // draw each mob
         for (let i = 0, len = mobs.length; i < len; i++) {
 
-            let mob = mobs[i];
+            let mob = mobs[i],
+                lastX = mob.position.x,
+                lastY = mob.position.y;
 
             // draw head
             ctx.save();
-            ctx.translate(mob.position.x * this.tileSize, mob.position.y * this.tileSize);
+            ctx.translate(
+                mob.position.x * this.tileSize + (this.tileSize * 0.5),
+                mob.position.y * this.tileSize + (this.tileSize * 0.5)
+            );
+            ctx.rotate(mob.rotation);
+            ctx.translate(-(this.tileSize * 0.5), -(this.tileSize * 0.5));
             ctx.fillStyle = 'hsl(' + mob.color + ', 50%, 60%)';
             ctx.fillRect(padding, padding, mobSize, mobSize);
             this.drawTile(ctx, 0, 0, 2);
@@ -121,6 +128,10 @@ class render {
                 let part = mob.bodyParts[j];
                 let last = (j + 1 === jLen) ? true : false;
 
+                if (lastX === part.x && lastY === part.y) {
+                    break;
+                }
+
                 ctx.save();
                 ctx.translate(part.x * this.tileSize, part.y * this.tileSize);
                 if (last) {
@@ -129,12 +140,11 @@ class render {
                     ctx.fillStyle = 'hsl(' + this.addColorValue(mob.color, 20) + ', 50%, 60%)';
                 }
                 ctx.fillRect(padding, padding, mobSize, mobSize);
-                if (last) {
-                    this.drawTile(ctx, 0, 0, 4);
-                } else {
-                    this.drawTile(ctx, 0, 0, 3);
-                }
+                this.drawTile(ctx, 0, 0, 3);
                 ctx.restore();
+
+                lastX = part.x;
+                lastY = part.y;
 
             }
 

@@ -18,6 +18,8 @@ class mob {
             y: direction.y || 0
         };
 
+        this.rotation = 0;
+
         this.bodyParts = [];
 
         for (let i = 0, len = this.length -1; i < len; i++) {
@@ -68,30 +70,36 @@ class mob {
         } else if (typeof direction === 'string') {
 
             let x = 0,
-                y = 0;
+                y = 0,
+                pi180 = Math.PI / 180;
 
             switch (direction) {
                 case 'right':
                     x = 1;
                     y = 0;
+                    this.rotation = 180 * pi180;
                     break;
                 case 'left':
                     x = -1;
                     y = 0;
+                    this.rotation = 0;
                     break;
                 case 'up':
                     x = 0;
                     y = -1;
+                    this.rotation = 90 * pi180;
                     break;
                 case 'down':
                     x = 0;
                     y = 1;
+                    this.rotation = 270 * pi180;
                     break;
             }
 
             this.direction.x = x;
             this.direction.y = y;
         }
+
     }
 
     getDirection(asString = false) {
