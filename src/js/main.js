@@ -17,7 +17,7 @@ class Game {
 
     constructor() {
 
-        const FRAME_LENGTH = 1000 / 1;
+        const FRAME_LENGTH = 1000 / 15;
 
         var mobs = dom.loadStorage('mobs');
 
@@ -25,6 +25,8 @@ class Game {
             mobs = settings.mobs;
             dom.saveStorage('mobs', mobs);
         }
+
+        this.state = 'loading';
 
         this.layout = new layout(settings.width, settings.height);
         this.loop = new loop(this, FRAME_LENGTH, this.update, this.draw);
@@ -45,8 +47,14 @@ class Game {
         this.keyActive = false;
         this.countdown = {
           current: 3,
-          interval: 3000,
+          interval: 1000,
           timePassed: 0
+        };
+
+        this.instructions = {
+            current: 10,
+            interval: 1000,
+            timePassed: 0
         };
         this.loop.start();
 
@@ -69,17 +77,54 @@ class Game {
         }
 
         if (!this.isLoading) {
-            if (this.countdown.current > 0) {
 
-                this.countdown.timePassed += t;
+            switch(this.state) {
 
-                if (this.countdown.timePassed > this.countdown.interval) {
-                    this.countdown.current--;
-                    this.countdown.timePassed -= this.countdown.interval;
-                }
+                case 'loading':
 
-            } else {
-                this.levels.updateMobs();
+                    if (!this.isLoading) {
+                        this.state = 'instructions';
+                    }
+                    break;
+
+                case 'instructions':
+
+                    if (this.instructions.current > 0) {
+
+                        this.instructions.timePassed += t;
+
+                        if (this.instructions.timePassed > this.instructions.interval) {
+                            this.instructions.current--;
+                            this.instructions.timePassed -= this.instructions.interval;
+                        }
+                    } else {
+                        this.state = 'countdown';
+                    }
+
+                    break;
+
+                case 'countdown':
+
+                    if (this.countdown.current > 0) {
+
+                        this.countdown.timePassed += t;
+
+                        if (this.countdown.timePassed > this.countdown.interval) {
+                            this.countdown.current--;
+                            this.countdown.timePassed -= this.countdown.interval;
+                        }
+
+                    } else {
+                        this.state = 'game';
+                    }
+                    break;
+
+                case 'game':
+
+                    this.levels.updateMobs();
+
+                    break;
+
             }
         }
 
@@ -87,35 +132,51 @@ class Game {
 
     draw() {
 
-        this.layout.ctx.fillStyle = 'hsl(30, 30%, 40%)';
-        this.layout.ctx.fillRect(0, 0, settings.width, settings.height);
+        this.layout.ctx.clearRect(0, 0, settings.width, settings.height);
+        //this.layout.ctx.fillStyle = 'hsl(30, 30%, 100%)';
+        //this.layout.ctx.fillRect(0, 0, settings.width, settings.height);
 
-        if (this.isLoading) {
-            render.drawLoader(this.layout.ctx, loader.progress());
-        } else {
+        switch (this.state) {
 
-            let offset = {
-                x: 0,
-                y: 0
-            };
+            case 'loading':
 
-            if (this.currentLevel.width * render.tileSize < render.width) {
-                offset.x = (render.width - (this.currentLevel.width * render.tileSize)) * 0.5;
-            } else {
-                offset.y = (render.height - (this.currentLevel.height * render.tileSize)) * 0.5;
-            }
+                render.drawLoader(this.layout.ctx, loader.progress());
 
-            this.layout.ctx.save();
-            this.layout.ctx.translate(offset.x, offset.y);
+                break;
 
-            render.drawMap(this.layout.ctx, this.currentLevel);
-            render.drawMobs(this.layout.ctx, this.currentLevel.mobs, this.currentLevel);
+            case 'instructions':
 
-            this.layout.ctx.restore();
+                render.drawInstructions(this.layout.ctx);
 
-            if (this.countdown.current > 0) {
-                render.drawCountdown(this.layout.ctx, this.countdown.current);
-            }
+                break;
+
+            case 'countdown':
+            case 'game':
+
+                let offset = {
+                    x: 0,
+                    y: 0
+                };
+
+                if (this.currentLevel.width * render.tileSize < render.width) {
+                    offset.x = (render.width - (this.currentLevel.width * render.tileSize)) * 0.5;
+                } else {
+                    offset.y = (render.height - (this.currentLevel.height * render.tileSize)) * 0.5;
+                }
+
+                this.layout.ctx.save();
+                this.layout.ctx.translate(offset.x, offset.y);
+
+                render.drawMap(this.layout.ctx, this.currentLevel);
+                render.drawMobs(this.layout.ctx, this.currentLevel.mobs, this.currentLevel);
+
+                this.layout.ctx.restore();
+
+                if (this.countdown.current > 0) {
+                    render.drawCountdown(this.layout.ctx, this.countdown.current);
+                }
+
+                break;
 
         }
 

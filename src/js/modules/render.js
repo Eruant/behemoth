@@ -169,6 +169,21 @@ class render {
       ctx.textAlign = 'center';
       ctx.fillText(number, settings.width * 0.5, settings.height * 0.5);
     }
+
+    drawInstructions(ctx) {
+        ctx.fillStyle = 'hsl(0, 30%, 90%)';
+        ctx.font = '30px Georgia';
+        ctx.textAlign = 'center';
+
+        ctx.save();
+        ctx.translate(settings.width * 0.5, settings.height * 0.5);
+        ctx.fillText('Pick a snake to win', 0, -70);
+        ctx.font = '40px Georgia';
+        ctx.fillText('Press any key to open and close the gates', 0, 0);
+        ctx.font = '30px Georgia';
+        ctx.fillText('The last snake alive wins', 0, 70);
+        ctx.restore();
+    }
 }
 
 export default new render();
