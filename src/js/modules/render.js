@@ -183,6 +183,25 @@ class render {
         ctx.font = '30px Georgia';
         ctx.fillText('The last snake alive wins', 0, 70);
         ctx.restore();
+
+        ctx.font = '15px Georgia';
+        ctx.fillText('The game will start within 5 seconds', settings.width * 0.5, settings.height - 30);
+    }
+
+    drawEnd(ctx, mob) {
+        ctx.fillStyle = 'hsl(0, 30%, 90%)';
+        ctx.font = '30px Georgia';
+        ctx.textAlign = 'center';
+
+        ctx.save();
+        ctx.translate(settings.width * 0.5, settings.height * 0.5);
+        ctx.fillText('The winner is:', 0, -30);
+        ctx.font = '40px Georgia';
+        ctx.fillText(mob.color, 0, 10);
+        ctx.restore();
+
+        ctx.font = '15px Georgia';
+        ctx.fillText('The game will restart automatically', settings.width * 0.5, settings.height - 30);
     }
 }
 

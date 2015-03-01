@@ -52,4 +52,8 @@ dom.setStyles = function () {
 
 };
 
+dom.reload = function () {
+    _window.location.reload();
+};
+
 export default dom;

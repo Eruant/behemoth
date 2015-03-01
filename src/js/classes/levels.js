@@ -9,6 +9,8 @@ class levels {
 
         this.maps = {};
         this.currentMap = null;
+
+        this.finished = false;
     }
 
     add(options) {
@@ -78,6 +80,9 @@ class levels {
         }
 
         this.checkCollisions();
+
+        return this.finished;
+
     }
 
     updateMob(mob) {
@@ -172,7 +177,7 @@ class levels {
             mobs.splice(deadMobs[i], 1);
 
             if (mobs.length === 1) {
-                //console.log('winner', mobs[0]);
+                this.finished = mobs[0];
             }
         }
 

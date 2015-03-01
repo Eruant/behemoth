@@ -27,6 +27,7 @@ class Game {
         }
 
         this.state = 'loading';
+        this.winner = false;
 
         this.layout = new layout(settings.width, settings.height);
         this.loop = new loop(this, FRAME_LENGTH, this.update, this.draw);
@@ -52,7 +53,7 @@ class Game {
         };
 
         this.instructions = {
-            current: 10,
+            current: 5,
             interval: 1000,
             timePassed: 0
         };
@@ -123,7 +124,21 @@ class Game {
 
                 case 'game':
 
-                    this.levels.updateMobs();
+                    let finished = this.levels.updateMobs();
+
+                    if (finished) {
+                        this.winner = finished;
+                        this.state = 'end';
+                    }
+
+                    break;
+
+                case 'end':
+
+                    this.loop.stop();
+                    dom.setTimeout(() => {
+                        dom.reload();
+                    }, 5000);
 
                     break;
 
@@ -135,8 +150,6 @@ class Game {
     draw() {
 
         this.layout.ctx.clearRect(0, 0, settings.width, settings.height);
-        //this.layout.ctx.fillStyle = 'hsl(30, 30%, 100%)';
-        //this.layout.ctx.fillRect(0, 0, settings.width, settings.height);
 
         switch (this.state) {
 
@@ -177,6 +190,12 @@ class Game {
                 if (this.countdown.current > 0) {
                     render.drawCountdown(this.layout.ctx, this.countdown.current);
                 }
+
+                break;
+
+            case 'end':
+
+                render.drawEnd(this.layout.ctx, this.winner);
 
                 break;
 
