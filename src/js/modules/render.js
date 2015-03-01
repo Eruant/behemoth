@@ -22,6 +22,8 @@ class render {
 
         this.tileSize = (maxTileWidth > maxTileHeight) ? maxTileHeight : maxTileWidth;
 
+        this.tileSize = Math.floor(this.tileSize);
+
     }
 
     drawTile(ctx, x, y, type = 0) {
@@ -189,6 +191,10 @@ class render {
     }
 
     drawEnd(ctx, mob) {
+
+        var mobSize = this.tileSize * 0.7,
+            padding = (this.tileSize - mobSize) * 0.5;
+
         ctx.fillStyle = 'hsl(0, 30%, 90%)';
         ctx.font = '30px Georgia';
         ctx.textAlign = 'center';
@@ -197,11 +203,19 @@ class render {
         ctx.translate(settings.width * 0.5, settings.height * 0.5);
         ctx.fillText('The winner is:', 0, -30);
         ctx.font = '40px Georgia';
-        ctx.fillText(mob.name, 0, 10);
+        ctx.fillText(mob.name, 0, 20);
         ctx.restore();
 
         ctx.font = '15px Georgia';
         ctx.fillText('The game will restart automatically', settings.width * 0.5, settings.height - 30);
+
+        ctx.save();
+        ctx.translate((settings.width - this.tileSize) * 0.5, (settings.height * 0.5) + 40);
+        ctx.fillStyle = 'hsl(' + mob.color + ', 50%, 60%)';
+        ctx.fillRect(padding, padding, mobSize, mobSize);
+        this.drawTile(ctx, 0, 0, 2);
+        ctx.restore();
+
     }
 }
 
