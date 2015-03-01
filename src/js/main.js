@@ -62,6 +62,8 @@ class Game {
 
     start() {
 
+        dom.setStyles();
+
         this.isLoading = false;
         this.currentLevel = this.levels.maps[this.levels.currentMap];
         render.clearLoader(this.layout.ctx);

@@ -43,4 +43,13 @@ dom.loadStorage = function (key) {
     return JSON.parse(item);
 };
 
+dom.setStyles = function () {
+
+    var body = _document.querySelector('body');
+
+    body.style.backgroundColor = 'hsl(90, 30%, 30%)';
+    body.style.textAlign = 'center';
+
+};
+
 export default dom;
