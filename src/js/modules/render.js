@@ -197,7 +197,7 @@ class render {
         ctx.translate(settings.width * 0.5, settings.height * 0.5);
         ctx.fillText('The winner is:', 0, -30);
         ctx.font = '40px Georgia';
-        ctx.fillText(mob.color, 0, 10);
+        ctx.fillText(mob.name, 0, 10);
         ctx.restore();
 
         ctx.font = '15px Georgia';

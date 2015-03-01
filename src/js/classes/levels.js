@@ -22,6 +22,8 @@ class levels {
         this.maps[options.name].mobs = [];
         for (let i = 0, len = options.mobs.length; i < len; i++) {
 
+            let name = mobSettings[i].name;
+
             let mobData = options.mobs[i];
 
             let position = {
@@ -36,7 +38,7 @@ class levels {
 
             let color = parseInt(mobSettings[i].color, 10);
 
-            this.maps[options.name].mobs.push(new mob(position, direction, color));
+            this.maps[options.name].mobs.push(new mob(name, position, direction, color));
         }
     }
 

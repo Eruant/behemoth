@@ -3,19 +3,19 @@
     "height": "600",
     "mobs": [
         {
-            "name": "mob-1",
+            "name": "Rose",
             "color": "0"
         },
         {
-            "name": "mob-2",
+            "name": "Emerald",
             "color": "90"
         },
         {
-            "name": "mob-3",
+            "name": "Azura",
             "color": "180"
         },
         {
-            "name": "mob-4",
+            "name": "Viola",
             "color": "270"
         }
     ]

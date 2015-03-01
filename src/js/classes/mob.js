@@ -1,8 +1,9 @@
 
 class mob {
 
-    constructor(position, direction, color = Math.floor(Math.random(360))) {
+    constructor(name, position, direction, color = Math.floor(Math.random(360))) {
 
+        this.name = name;
         this.length = 5;
         this.minLength = 3;
 
