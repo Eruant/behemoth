@@ -28,7 +28,7 @@ class render {
 
     drawTile(ctx, x, y, type = 0) {
 
-        var size = 16,
+        var size = 64,
             sx = size * type,
             sy = 0,
             sw = size,
@@ -77,13 +77,13 @@ class render {
                       //this.drawTile(ctx, x, y, 0);
                       break;
                 case 'c':
-                      this.drawTile(ctx, x, y, 0);
+                      this.drawTile(ctx, x, y, 4);
                       break;
                 case 'o':
                       this.drawTile(ctx, x, y, 1);
                       break;
                 default:
-                      this.drawTile(ctx, x, y, 1);
+                      this.drawTile(ctx, x, y, 0);
             }
 
             if (i % map.width === map.width - 1) {
@@ -180,7 +180,7 @@ class render {
         ctx.save();
         ctx.translate(settings.width * 0.5, settings.height * 0.5);
         ctx.fillText('Pick a snake to win', 0, -70);
-        ctx.font = '40px Georgia';
+        ctx.font = '35px Georgia';
         ctx.fillText('Press any key to open and close the gates', 0, 0);
         ctx.font = '30px Georgia';
         ctx.fillText('The last snake alive wins', 0, 70);

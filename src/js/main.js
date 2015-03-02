@@ -17,7 +17,7 @@ class Game {
 
     constructor() {
 
-        const FRAME_LENGTH = 1000 / 15;
+        const FRAME_LENGTH = 1000 / 3;
 
         var mobs = dom.loadStorage('mobs');
 
